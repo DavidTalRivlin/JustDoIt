@@ -37,24 +37,25 @@ function save(todo) {
 
 function getEmptyTodo() {
     return {
-        vendor: 'Susita-' + (Date.now() % 1000),
-        price: utilService.getRandomIntInclusive(1000, 9000),
+        txt: '',
+        isDone: false,
+        creator: 'user',
+        createdAt: Date.now()
     }
 }
 
 function _createTodos() {
     let todos = utilService.loadFromStorage(STORAGE_KEY)
+    console.log('inside _createTodos')
     if (!todos || !todos.length) {
-
         todos = [
-            { id: utilService.makeId(), txt: 'strikethroughs', isDone: true, creator: 'user' },
-            { id: utilService.makeId(), txt: 'Lists', isDone: false, creator: 'user' },
-            { id: utilService.makeId(), txt: 'Irony', isDone: false, creator: 'user' },
-            { id: utilService.makeId(), txt: 'Lists', isDone: false, creator: 'user' },
-            { id: utilService.makeId(), txt: 'Repetition', isDone: false, creator: 'user' },
-            { id: utilService.makeId(), txt: 'Inconsistency', isDone: false, creator: 'user' },
-
+            { _id: utilService.makeId(), txt: 'strikethroughs', isDone: true, creator: 'user', createdAt: Date.now() },
+            { _id: utilService.makeId(), txt: 'Lists', isDone: false, creator: 'user', createdAt: Date.now() },
+            { _id: utilService.makeId(), txt: 'Irony', isDone: false, creator: 'user', createdAt: Date.now() },
+            { _id: utilService.makeId(), txt: 'Lists', isDone: false, creator: 'user', createdAt: Date.now() },
+            { _id: utilService.makeId(), txt: 'Repetition', isDone: false, creator: 'user', createdAt: Date.now() },
+            { _id: utilService.makeId(), txt: 'Inconsistency', isDone: false, creator: 'user', createdAt: Date.now() }
         ]
-
+        utilService.saveToStorage(STORAGE_KEY, todos)
     }
 }
