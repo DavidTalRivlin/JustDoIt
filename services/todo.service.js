@@ -30,7 +30,7 @@ function save(todo) {
         return storageService.put(STORAGE_KEY, todo)
     } else {
         // when switching to backend - remove the next line
-        todo.owner = userService.getLoggedinUser()
+        // todo.owner = userService.getLoggedinUser()
         return storageService.post(STORAGE_KEY, todo)
     }
 }
@@ -46,7 +46,6 @@ function getEmptyTodo() {
 
 function _createTodos() {
     let todos = utilService.loadFromStorage(STORAGE_KEY)
-    console.log('inside _createTodos')
     if (!todos || !todos.length) {
         todos = [
             { _id: utilService.makeId(), txt: 'strikethroughs', isDone: true, creator: 'user', createdAt: Date.now() },

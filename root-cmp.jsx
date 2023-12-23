@@ -3,6 +3,7 @@ const { Route, Routes } = ReactRouterDOM
 const { Provider } = ReactRedux
 
 import { TodoApp } from "./Pages/TodoApp.jsx"
+import { store } from "./store/store.js"
 
 // import { AppHeader } from './cmps/AppHeader.jsx'
 // import { AppFooter } from './cmps/AppFooter.jsx'
@@ -18,7 +19,7 @@ export function App() {
 
     // render() {
         return (
-            // <Provider store={store}>
+            <Provider store={store}>
             <Router>
                 <section className="main-layout app">
                     {/* <AppHeader /> */}

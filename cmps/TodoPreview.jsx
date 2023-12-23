@@ -7,7 +7,7 @@ export function TodoPreview({todo, onDoneToggle, onRemoveTodo, onTodoContentChan
 
         <section>
             <i className={`far ${(todo.isDone) ? 'fa-check-square' : 'fa-square'}`}
-                onClick={() => onDoneToggle(todo._id)}></i>
+                onClick={() => onDoneToggle(todo)}></i>
 
             <label
                 className="to-do-label to-do-txt content-editable-placeholder notes-inner-txt"
@@ -17,7 +17,7 @@ export function TodoPreview({todo, onDoneToggle, onRemoveTodo, onTodoContentChan
                 contentEditable="true"
                 spellCheck="false"
                 suppressContentEditableWarning={true}
-                onBlur={(event) => onTodoContentChange(event, todo._id)}>
+                onBlur={(event) => onTodoContentChange(event, todo)}>
                 {todo.txt}
             </label>
 
