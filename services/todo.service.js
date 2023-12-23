@@ -1,4 +1,3 @@
-import { func } from 'prop-types'
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 
@@ -9,22 +8,41 @@ export const todoService = {
     getById,
     save,
     remove,
-    getEmptyTodo
+    getEmptyTodo,
+    getDefaultFilter
 }
 
 _createTodos()
 
-function query() {
+function query(filterBy) {
     // return axios.get(BASE_URL).then(res => res.data)
+
     return storageService.query(STORAGE_KEY)
+        .then(todos => {
+            if (filterBy.txt) {
+                const regex = new RegExp(filterBy.txt, 'i')
+                todos = todos.filter(todo => regex.test(todo.txt))
+            }
+            console.log('filterBy.isDone', filterBy.isDone)
+            if (filterBy.isDone === 'Done') {
+                todos = todos.filter(todo => todo.isDone)
+            } else if (filterBy.isDone === 'Active')
+                todos = todos.filter(todo => !todo.isDone)
+            return todos
+        })
 }
+
+
+
 function getById(todoId) {
     return storageService.get(STORAGE_KEY, todoId)
 }
+
 function remove(todoId) {
     // return Promise.reject('Not now!')
     return storageService.remove(STORAGE_KEY, todoId)
 }
+
 function save(todo) {
     if (todo._id) {
         return storageService.put(STORAGE_KEY, todo)
@@ -42,6 +60,10 @@ function getEmptyTodo() {
         creator: 'user',
         createdAt: Date.now()
     }
+}
+
+function getDefaultFilter() {
+    return { txt: '', isDone: '' }
 }
 
 function _createTodos() {

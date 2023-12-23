@@ -33,7 +33,7 @@ export function App() {
                     {/* <AppFooter /> */}
                 </section>
             </Router>
-            // </Provider>
+            </Provider>
         )
     }
 // }
